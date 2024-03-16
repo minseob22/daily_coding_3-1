@@ -1,49 +1,83 @@
 #include <stdio.h>
 #include <stdbool.h>
+
 #define MAX_SIZE 5
 
-int circualr_queue [MAX_SIZE];
-int front = 0;
-int rear = 0;
-bool LastOperateAddQ = true;
+int queue[MAX_SIZE];
+int front = -1;
+int rear = -1;
 
-int enqueue(){
-    rear++;
-    LastOperateAddQ = true;
-
+bool is_empty() {
+    return (front == -1 && rear == -1);
 }
-int cirular_queue_full(
-    if (front == rear && LastOperateAddQ == true){
 
-    };
-)
+bool is_full() {
+    return ((rear + 1) % MAX_SIZE == front);
+}
 
-void main(){
+void enqueue(int val) {
+    if (is_full()) {
+        printf("Queue is full. Cannot enqueue element.\n");
+        return;
+    }
+
+    if (is_empty()) {
+        front = 0;
+    }
+
+    rear = (rear + 1) % MAX_SIZE;
+    queue[rear] = val;
+    printf("Enqueued element: %d\n", val);
+}
+
+void dequeue() {
+    if (is_empty()) {
+        printf("Queue is empty. Cannot dequeue element.\n");
+        return;
+    }
+
+    printf("Dequeued element: %d\n", queue[front]);
+
+    if (front == rear) {
+        front = -1;
+        rear = -1;
+    } else {
+        front = (front + 1) % MAX_SIZE;
+    }
+}
+
+void display() {
+    if (is_empty()) {
+        printf("Queue is empty.\n");
+        return;
+    }
+
+    printf("Queue elements: ");
+    int i = front;
+    while (i != rear) {
+        printf("%d ", queue[i]);
+        i = (i + 1) % MAX_SIZE;
+    }
+    printf("%d\n", queue[rear]);
+}
+
+int main() {
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    display();
+    dequeue();
+    display();
+    enqueue(4);
+    enqueue(5);
+    display();
+    enqueue(6); // Queue is full
+    dequeue();
+    dequeue();
+    display();
+    dequeue();
+    dequeue();
+    dequeue(); // Queue is empty
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-circualr queue를 linkes list로 구현 하는 것 된다
-
-circular queue는 차있을 떄와 비어있을 떄 front와 rear가 같다... 이문제를 해결 해야한다.
-
-curculat queue를 할때 lastOperateADDQ가 tue 인지 false인지로 확인하던가
-
-
-*/
