@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
-        printf("사용법: %s a b c\n", argv[0]);
+        printf("사법: %s a b c\n", argv[0]);
         return 1;
     }
 

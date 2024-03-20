@@ -50,10 +50,10 @@ void push(int val) {
     printf("Pushed element: %d\n", val);
 }
 
-int pop() {
+void pop() {
     if (is_empty(front1, rear1) && is_empty(front2, rear2)) {
         printf("Stack is empty. Cannot pop element.\n");
-        return -1;
+        return;
     }
 
     if (is_empty(front1, rear1)) {
@@ -66,8 +66,13 @@ int pop() {
         enqueue(queue2, &front2, &rear2, dequeue(queue1, &front1, &rear1));
     }
 
-    return dequeue(queue1, &front1, &rear1);
+    int popped_element = dequeue(queue1, &front1, &rear1);
+    if (popped_element != -1) {
+        printf("Popped element: %d\n", popped_element);
+    }
 }
+
+
 
 int main() {
     push(1);
@@ -77,17 +82,17 @@ int main() {
     push(5);
     push(6); // Stack is full
 
-    printf("Popped element: %d\n", pop());
-    printf("Popped element: %d\n", pop());
+    pop();
+    pop();
 
     push(7);
     push(8);
 
-    printf("Popped element: %d\n", pop());
-    printf("Popped element: %d\n", pop());
-    printf("Popped element: %d\n", pop());
-    printf("Popped element: %d\n", pop());
-    printf("Popped element: %d\n", pop()); // Stack is empty
-
+    pop();
+    pop();
+    pop();
+    pop();
+    pop(); // Stack is empty
+    pop();
     return 0;
 }
